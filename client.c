@@ -76,12 +76,11 @@ int main(int argc, char* argv[])
             exit(1);
         }
 
-        double numbers[3];
+        double numbers[2];
         echoLen = sizeof(numbers); /* Determine input length */
 
         numbers[0] = 0; //finish
         numbers[1] = 0;  //ans
-        numbers[2] = i;   //index
 
         if (send(sock, numbers, echoLen, 0) != echoLen)
         {
@@ -116,7 +115,6 @@ int main(int argc, char* argv[])
         printf("Accountant %d finished calculation: area = %lf\n", i, ans);
         numbers[0] = 1; //finish
         numbers[1] = ans;  //ans
-        numbers[2] = i;   //index
         echoLen = sizeof(numbers);
         if (send(sock, numbers, echoLen, 0) != echoLen)
         {
