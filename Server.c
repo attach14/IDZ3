@@ -1,4 +1,4 @@
-﻿#include "data.h"
+#include "data.h"
 
 #define MAXPENDING 30 /* Maximum outstanding connection requests */
 
@@ -22,12 +22,6 @@ int main(int argc, char* argv[])
     {
         fprintf(stderr, "Usage:  %s <Server IP> <Server Port>\n", argv[0]);
         exit(1);
-    }
-    int dataBase[BUFFER_SIZE];
-
-    for (int i = 0; i < BUFFER_SIZE; ++i)
-    {
-        dataBase[i] = i;
     }
 
     echoServPort = atoi(argv[2]); /* First arg:  local port */
@@ -102,7 +96,7 @@ int main(int argc, char* argv[])
         printf("Handling client %s\n", inet_ntoa(echoClntAddr.sin_addr));
 
         //
-        double request[3];
+        double request[2];
         double answer[9];
         int recvMsgSize; /* Size of received message */
 
