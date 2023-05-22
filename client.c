@@ -55,7 +55,7 @@ int main(int argc, char* argv[])
     }
     (void)signal(SIGINT, my_handler);
     srand(0);
-    for (int i = 0; i < 20; ++i)
+    for (int i = 0; i < n + 1; ++i)
     {
         /* Create a reliable, stream socket using TCP */
         if ((sock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0)
@@ -75,8 +75,18 @@ int main(int argc, char* argv[])
             perror("connect() failed");
             exit(1);
         }
-
         double numbers[2];
+        echoLen = sizeof(numbers);
+        if (i == 0) {
+            numbers[0] = n;
+            if (send(sock, numbers, echoLen, 0) != echoLen)
+            {
+                perror("send() sent a different number of bytes than expected");
+                exit(1);
+            }
+            sleep(1);
+            continue;
+        }
         echoLen = sizeof(numbers); /* Determine input length */
 
         numbers[0] = 0; //finish
